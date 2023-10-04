@@ -1,0 +1,69 @@
+<h3 class="text-center"> Update Product</h3>
+<div *ngIf="updateForm">
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="mt-4">
+
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" formControlName="Name" id="name"  class="form-control" placeholder="Enter product name">
+    <div *ngIf="updateForm.get('Name').touched && updateForm.get('Name').errors">
+      <div *ngIf="updateForm.get('Name').errors.required"class="text-danger">Name is required.</div>
+      <div *ngIf="updateForm.get('Name').errors.maxlength"class="text-danger">Name should not be more than 100 characters.</div>
+      <div *ngIf="updateForm.get('Name').errors.startsWithNumber" class="text-danger">Name should not start with a number.</div>
+      <div *ngIf="updateForm.get('Name').errors.pattern" class="text-danger">Name should not contain special character.</div>
+
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="qty" class="form-label">Qty</label>
+    <input type="number" formControlName="Qty" id="qty" class="form-control">
+    <div *ngIf="updateForm.get('Qty')?.invalid && (updateForm.get('Qty')?.dirty || updateForm.get('Qty')?.touched)">
+      <span *ngIf="updateForm.get('Qty')?.errors?.['required']" class="text-danger" >* Qty is required.</span>
+      <span *ngIf="updateForm.get('Qty')?.errors?.['min']" class="text-danger" >Qty should be more than 0</span>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="rate" class="form-label">Rate</label>
+    <input type="number" formControlName="Rate" id="rate" class="form-control">
+    <div *ngIf="updateForm.get('Rate')?.invalid && (updateForm.get('Rate')?.dirty || updateForm.get('Rate')?.touched)">
+      <span *ngIf="updateForm.get('Rate')?.errors?.['required']" class="text-danger" >* Rate is required.</span>
+      <span *ngIf="updateForm.get('Rate')?.errors?.['min']" class="text-danger" >Rate should be more than 0</span>
+    </div>
+  </div>
+
+  
+
+  <div class="mb-3">
+    <label for="category" class="form-label">Select Category</label>
+    <select formControlName="Category" id="catId" class="form-control" placeholder="category">
+      <option *ngFor="let category of CategoryList" [value]="category.id">{{ category.name }}</option>
+    </select>
+    <div *ngIf="updateForm.get('Category').touched && updateForm.get('Category').errors">
+      <div *ngIf="updateForm.get('Category').errors.required" class="text-danger">Category is required.</div>
+      <div *ngIf="updateForm.get('Category').errors.min" class="text-danger">Category must be greater than 0.</div>
+    </div>
+  </div>
+
+  <div class="mb-3 row align-items-center">
+    <label class="form-label col-auto">Upload Image:-</label>
+    <div class="col-auto">
+      <img src="{{imageUrl+product.profile}}" height="50" width="50" alt="image not found" class="img-fluid">
+    </div>
+    <div class="col">
+      <input type="file" (change)="handleUpload($event)" class="form-control">
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input type="checkbox" formControlName="IsActive"  class="form-check-input"> &nbsp;
+    <label class="form-check-label">IsActive</label>
+    <div *ngIf="updateForm.get('IsActive')?.invalid && (updateForm.get('IsActive')?.dirty || updateForm.get('IsActive')?.touched)">
+      <!-- div class="invalid-feedback">Please select a value for IsActive.</div> -->
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!isFormValid()">Save</button> &nbsp;
+  <button type="button" [routerLink]="'/product'" class="btn btn-secondary">Cancel</button>
+</form>
+</div>

@@ -1,0 +1,25 @@
+<div class="container my-5">
+    <div class="row">
+      <div class="col-12 col-md-2 my-2">
+        <a href="/addsubcat" class="btn btn-outline-primary">Add</a>
+      </div>
+      <div class="col-12 col-md-5 my-2">
+        
+      </div>
+    </div>
+  
+    <div class="row m-2 border border-1 border-warning rounded bg-dark text-light">
+      <div class="col-sm-1 p-2 fw-bold">SR.No</div>
+      <div class="col-sm-3 p-2 fw-bold">Name</div>
+      <div class="col-sm-2 p-2 fw-bold">Action</div>
+    </div>
+  
+    <div class="row m-2 border border-1 border-warning rounded bg-dark text-light" *ngFor="let each of SubCategoryList; let i=index">
+      <div class="col-sm-1 p-2">{{i+1}}</div>
+      <div class="col-sm-3 p-2">{{each.name}}</div>
+      <div class="col-sm-2 p-2">
+        <button type="button" class="btn btn-outline-success me-2" (click)="OnEdit(each.id)">Edit</button>
+        <button type="button" class="btn btn-outline-danger" (click)="onDelete(each.id)">Delete</button>
+      </div>
+    </div>
+  </div>

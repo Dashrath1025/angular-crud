@@ -1,0 +1,19 @@
+<h3 class="text-center">Add Category</h3>
+<form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="mt-4">
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" formControlName="Name" id="name"  class="form-control" placeholder="Enter Category name">
+    <div *ngIf="categoryForm.get('Name').touched && categoryForm.get('Name').errors">
+      <div *ngIf="categoryForm.get('Name').errors.required"class="text-danger">Name is required.</div>
+      <div *ngIf="categoryForm.get('Name').errors.maxlength"class="text-danger">Name should not be more than 100 characters.</div>
+      <div *ngIf="categoryForm.get('Name').errors.startsWithNumber" class="text-danger">Name should not start with a number.</div>
+      <div *ngIf="categoryForm.get('Name').errors.pattern" class="text-danger">Name should not contain special character.</div>
+    </div>
+  </div>
+  <div class="form-group mt-2">
+    <button type="submit" class="btn btn-success" >Add</button>&nbsp;
+    <button type="reset" class="btn btn-danger">Reset</button> &nbsp;
+    <button type="button" [routerLink]="'/category'" class="btn btn-secondary">Cancel</button>
+  </div>
+    </form>
